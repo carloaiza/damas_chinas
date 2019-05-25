@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaViewDlg" widgetVar="PersonaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPersonaTitle}">
+            <h:form id="PersonaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPersonaLabel_identificacion}"/>
+                        <h:outputText value="#{personaController.selected.identificacion}" title="#{bundle.ViewPersonaTitle_identificacion}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_nombre}"/>
+                        <h:outputText value="#{personaController.selected.nombre}" title="#{bundle.ViewPersonaTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_edad}"/>
+                        <h:outputText value="#{personaController.selected.edad}" title="#{bundle.ViewPersonaTitle_edad}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_familia}"/>
+                        <h:outputText value="#{personaController.selected.familia}" title="#{bundle.ViewPersonaTitle_familia}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_padre}"/>
+                        <h:outputText value="#{personaController.selected.padre}" title="#{bundle.ViewPersonaTitle_padre}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PersonaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

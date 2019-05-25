@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <style type="text/css">
+            .ui-diagram-element {   
+                width:5em; 
+                height:5em;
+                line-height:5em;
+                text-align: center;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
+                border-radius: 5em;
+                border: 1px solid #404a4e;
+                background-color: #404a4e;
+                color: #cccccc;
+            }
+
+            .ui-diagram-element:hover {
+                background-color: #20282b;
+            }
+        </style>
+        <h:form>
+
+        <p:diagram value="#{controladorDamasChinas.model}" style="height:600px" styleClass="ui-widget-content" />
+        <p:commandButton id="createButton" icon="ui-icon-plus"   
+                                             value="#{bundle.Create}" 
+                                             actionListener="#{personaController.prepareCreate}" update=":PersonaCreateForm" oncomplete="PF('PersonaCreateDialog').show()"/>
+        
+        <p:commandButton id="btnJugar" value="Jugar" action="jugar" ajax="false"/>
+        </h:form>
+        <ui:include src="persona/Create.xhtml"/>
+    </h:body>
+</html>
+

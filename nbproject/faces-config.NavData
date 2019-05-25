@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="tipoUsuario/Edit.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="persona/Edit.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="index.xhtml" x="911" y="62" zoom="true"/>
+        <Node id="familia/List.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="tipoUsuario/Create.xhtml" x="150" y="900" zoom="true"/>
+        <Node id="persona/Create.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="welcomePrimefaces.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="usuario/List.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="usuario/View.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="familia/Create.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="familia/View.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="usuario/Edit.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="ayuda.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="usuario/Create.xhtml" x="900" y="450" zoom="true"/>
+        <Node id="tipoUsuario/List.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="persona/List.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="familia/Edit.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="tipoUsuario/View.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="home.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="persona/View.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="template.xhtml" x="400" y="750" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

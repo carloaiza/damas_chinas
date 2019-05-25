@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaEditDlg" widgetVar="PersonaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPersonaTitle}">
+            <h:form id="PersonaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_identificacion}" for="identificacion" />
+                        <p:inputText id="identificacion" disabled="true" value="#{personaController.selected.identificacion}" title="#{bundle.EditPersonaTitle_identificacion}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_identificacion}"/>
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{personaController.selected.nombre}" title="#{bundle.EditPersonaTitle_nombre}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_edad}" for="edad" />
+                        <p:inputText id="edad" value="#{personaController.selected.edad}" title="#{bundle.EditPersonaTitle_edad}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_edad}"/>
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_familia}" for="familia" />
+                        <p:selectOneMenu id="familia" value="#{personaController.selected.familia}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_familia}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{familiaController.itemsAvailableSelectOne}"
+                                           var="familiaItem"
+                                           itemValue="#{familiaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_padre}" for="padre" />
+                        <p:selectOneMenu id="padre" value="#{personaController.selected.padre}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="padreItem"
+                                           itemValue="#{padreItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personaController.update}" value="#{bundle.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PersonaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PersonaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

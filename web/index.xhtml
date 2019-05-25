@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <center>
+                <p:growl id="gpErrores"/>
+                <p:panel header="Ingresar a Damas Chinas">
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="Correo:" for="txtCorreo"/>
+                        <p:inputText id="txtCorreo" required="true" size="30"
+                                     value="#{loginBean.usuario.correo}"     >
+                            <f:validateRegex pattern="^[^@]+@[^@]+\.[a-zA-Z]{2,}$"/>
+                        </p:inputText>
+                        <p:outputLabel value="Contraseña:" for="txtContrasena"/>
+                        <p:password id="txtContrasena" required="true" maxlength="10" 
+                                    value="#{loginBean.usuario.contrasena}"    >
+                            
+                        </p:password>
+                    </h:panelGrid>
+                </p:panel>
+                <p:commandButton value="Ingresar" ajax="false"
+                                 action="#{loginBean.ingresar()}"
+                                 update="@all" />
+                <p:commandButton value="Ayuda" action="ayuda" immediate="true"/> 
+            </center>
+        </h:form>
+
+    </h:body>
+
+
+
+
+</html>
+

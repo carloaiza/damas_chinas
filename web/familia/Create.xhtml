@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FamiliaCreateDlg" widgetVar="FamiliaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateFamiliaTitle}">
+            <h:form id="FamiliaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{familiaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateFamiliaLabel_apellido}" for="apellido" />
+                        <p:inputText id="apellido" value="#{familiaController.selected.apellido}" title="#{bundle.CreateFamiliaTitle_apellido}" required="true" requiredMessage="#{bundle.CreateFamiliaRequiredMessage_apellido}"/>
+                        <p:outputLabel value="#{bundle.CreateFamiliaLabel_numeroIntegrantes}" for="numeroIntegrantes" />
+                        <p:inputText id="numeroIntegrantes" value="#{familiaController.selected.numeroIntegrantes}" title="#{bundle.CreateFamiliaTitle_numeroIntegrantes}" required="true" requiredMessage="#{bundle.CreateFamiliaRequiredMessage_numeroIntegrantes}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{familiaController.create}" value="#{bundle.Save}" update="display,:FamiliaListForm:datalist,:growl" oncomplete="handleSubmit(args,'FamiliaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FamiliaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
