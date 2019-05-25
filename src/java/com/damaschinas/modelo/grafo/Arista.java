@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author carloaiza
+ * @author Carlos Loaiza
  */
 public class Arista implements Serializable{
     private int origen;
