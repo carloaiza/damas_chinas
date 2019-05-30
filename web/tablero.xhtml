@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-          
+
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Tablero Damas Chinas</title>
@@ -30,7 +30,7 @@
                 background-color: red;
                 color: #cccccc;
             }
-            
+
             .ui-diagram-element-ficha-blanca {   
                 width:2em; 
                 height:2em;
@@ -42,7 +42,7 @@
                 background-color: white;
                 color: #cccccc;
             }
-            
+
             .ui-diagram-element-ficha-azul {   
                 width:2em; 
                 height:2em;
@@ -60,12 +60,50 @@
         </style>
     </h:head>
     <h:body>
-        <h:form>
-        <h:panelGroup layout="block" style="overflow: auto; width: 100%; height: 1000px;" >
-        <p:diagram value="#{damasAppBean.model}" style="height:1000px" styleClass="ui-widget-content" />
-        </h:panelGroup>
-        
+        <h:form id="frmTablero">
+            <p:growl id="pgTablero"/>
+            <h:panelGroup id="panelTablero" layout="block" style="overflow: auto; width: 100%; height: 1000px;" >
+                <p:diagram id="tablero" value="#{damasAppBean.model}" style="height:1000px" styleClass="ui-widget-content" />
+            </h:panelGroup>
+
             <p:commandButton action="#{damasAppBean.simularJugada()}" value="Simular Jugada" update="@all" ajax="false"/>
+            
+            
+            <p:remoteCommand name="elementClickRight" 
+                                actionListener="#{damasAppBean.onClickRight()}">
+                </p:remoteCommand>
+            <script>
+                $(document).ready(function () {
+                    $('.ui-diagram > .ui-diagram-element').mousedown(function (info) {
+                        if (info.which === 3) {
+                            elementClickRight([{
+                                    name: 'elementId',
+                                    value: info.target.id
+                                }]);
+                            
+                        }
+                    });
+                });
+            </script>
+
+            
+            
+            <p:contextMenu for="panelTablero" id="cmFicha" 
+                          targetFilter=".ui-diagram-element" >
+                <p:menuitem value="Prueba" update="@all"
+                            ajax="false" icon="ui-icon-disk" 
+                            action="#{damasAppBean.pruebaMenu()}"
+                            />
+               <p:menuitem value="Prueba 2" update="@all"
+                            ajax="false" icon="ui-icon-disk" 
+                            action="#{damasAppBean.pruebaMenu()}"
+                            />
+               <p:menuitem value="Prueba 3" update="@all"
+                            ajax="false" icon="ui-icon-disk" 
+                            action="#{damasAppBean.pruebaMenu()}"
+                            />
+            </p:contextMenu>
+            
         </h:form>
     </h:body>
 </html>

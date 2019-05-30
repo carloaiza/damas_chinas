@@ -14,6 +14,7 @@ import com.damaschinas.modelo.grafo.Vertice;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.context.FacesContext;
 import org.primefaces.model.diagram.Connection;
 import org.primefaces.model.diagram.DefaultDiagramModel;
 import org.primefaces.model.diagram.Element;
@@ -36,9 +37,21 @@ public class DamasAppBean {
     private byte distancia = 10;
     private DefaultDiagramModel model;
     private Grafo tablero = new Grafo();
+    private String fichaClick="";
+    
 
     public DamasAppBean() {
     }
+
+    public String getFichaClick() {
+        return fichaClick;
+    }
+
+    public void setFichaClick(String fichaClick) {
+        this.fichaClick = fichaClick;
+    }
+    
+    
 
     public void llenarAristas() {
         //Crear aristas
@@ -53,21 +66,19 @@ public class DamasAppBean {
                     tablero.adicionarArista(vert.getId(), vert.getId() + 1, 2);
                 }
             }
-            else if (vert.getFicha().getNivel() == limiteSup)
-            {
-                if(vert.getId() < calcularRegresion(vert.getFicha().getNivel()))
+            else if (vert.getFicha().getNivel() >= limiteSup){
+                if(vert.getId() < calcularRegresion(vert.getFicha().getNivel())-
+                        ((vert.getFicha().getNivel() - 
+                        limiteSup + 1)*(vert.getFicha().getNivel()-limiteSup)))
                 {
+                    int vertice=(vert.getId() + vert.getFicha().getNivel())-
+                            ((vert.getFicha().getNivel() - 
+                            limiteSup)+(vert.getFicha().getNivel()-limiteSup));
+                    tablero.adicionarArista(vert.getId(), vertice, 1);
+                    tablero.adicionarArista(vert.getId()+1, vertice, 1);
                     tablero.adicionarArista(vert.getId(), vert.getId() + 1, 2);                    
                 }               
             }
-            else
-            {
-               // tablero.adicionarArista(vert.getId(), vert.getId() - vert.getFicha().getNivel()+1, 1);
-               // tablero.adicionarArista(vert.getId(), vert.getId() - vert.getFicha().getNivel()-2 , 1);
-         
-                
-            }    
-            
              
             
         }
@@ -79,8 +90,7 @@ public class DamasAppBean {
         for(int i=1; i<= num;i++)
         {
             suma=suma+i;
-        }    
-        
+        }            
         return suma;
     }
     
@@ -151,12 +161,6 @@ public class DamasAppBean {
         connector.setPaintStyle("{strokeStyle:'#404a4e', lineWidth:3}");
         connector.setHoverPaintStyle("{strokeStyle:'#20282b'}");
         model.setDefaultConnector(connector);
-        
-                
-        
-        
-        
-        
         //recorrer aristas
         for (Arista arista : tablero.getAristas()) {
             Element origen = model.getElements().get(arista.getOrigen() - 1);
@@ -216,6 +220,20 @@ public class DamasAppBean {
         elem1.setStyleClass("ui-diagram-element-ficha-blanca");
         
         elem2.setStyleClass("ui-diagram-element-ficha");
+    }
+    
+    public void onClickRight() {
+        String id = FacesContext.getCurrentInstance().getExternalContext()
+                .getRequestParameterMap().get("elementId");
+
+       fichaClick = id;
+
+    }
+
+    
+    public void pruebaMenu()
+    {
+        JsfUtil.addSuccessMessage(fichaClick + " presionada");
     }
 
 }
