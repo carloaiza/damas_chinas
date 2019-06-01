@@ -11,6 +11,7 @@ import com.damaschinas.modelo.grafo.Arista;
 import com.damaschinas.modelo.grafo.Ficha;
 import com.damaschinas.modelo.grafo.Grafo;
 import com.damaschinas.modelo.grafo.Vertice;
+import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
@@ -38,10 +39,23 @@ public class DamasAppBean {
     private DefaultDiagramModel model;
     private Grafo tablero = new Grafo();
     private String fichaClick="";
+    private boolean  estadoJuego=false;
+    
+    private Date fechaSistema;    
     
 
     public DamasAppBean() {
     }
+
+    public Date getFechaSistema() {
+        return new Date();
+    }
+
+    public void setFechaSistema(Date fechaSistema) {
+        this.fechaSistema = fechaSistema;
+    }
+    
+    
 
     public String getFichaClick() {
         return fichaClick;
@@ -50,6 +64,15 @@ public class DamasAppBean {
     public void setFichaClick(String fichaClick) {
         this.fichaClick = fichaClick;
     }
+
+    public boolean isEstadoJuego() {
+        return estadoJuego;
+    }
+
+    public void setEstadoJuego(boolean estadoJuego) {
+        this.estadoJuego = estadoJuego;
+    }
+    
     
     
 
@@ -119,6 +142,7 @@ public class DamasAppBean {
                 tablero.adicionarVertice(ficha);
                 //Element ceo = new Element(ficha, x + "em", y + "em");
                 Element ceo = new Element(tablero.getVertices().size(), x + "em", y + "em");
+                ceo.setId(String.valueOf(tablero.getVertices().size()));
                 ceo.setDraggable(false);
                 ceo.setStyleClass(styleColor);
                 ceo.addEndPoint(new BlankEndPoint(EndPointAnchor.BOTTOM));
@@ -141,9 +165,10 @@ public class DamasAppBean {
 
             for (int j = 1; j <= i; j++) {
                 Ficha ficha=new Ficha(color, contNivel);
-                tablero.adicionarVertice(ficha);                
-                //Element ceo = new Element(ficha, x + "em", y + "em");
+                tablero.adicionarVertice(ficha);                                
                 Element ceo = new Element(tablero.getVertices().size(), x + "em", y + "em");
+                ceo.setId(String.valueOf(tablero.getVertices().size()));
+                ceo.setDraggable(false);
                 ceo.setStyleClass(styleColor);
                 ceo.addEndPoint(new BlankEndPoint(EndPointAnchor.BOTTOM));
                 ceo.addEndPoint(new BlankEndPoint(EndPointAnchor.TOP));
@@ -225,15 +250,20 @@ public class DamasAppBean {
     public void onClickRight() {
         String id = FacesContext.getCurrentInstance().getExternalContext()
                 .getRequestParameterMap().get("elementId");
-
-       fichaClick = id;
+       
+       fichaClick = id.replaceAll("frmTablero:tablero-", "");;
 
     }
-
     
     public void pruebaMenu()
     {
         JsfUtil.addSuccessMessage(fichaClick + " presionada");
+    }
+    
+    public void activarJuego()
+    {
+        estadoJuego=true;
+        JsfUtil.addSuccessMessage("Se ha habilitado el juego");
     }
 
 }

@@ -18,7 +18,7 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>/home.xhtml</from-view-id>
+        <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>jugar</from-outcome>
            <to-view-id>/tablero.xhtml</to-view-id>           

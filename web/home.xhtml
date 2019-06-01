@@ -26,13 +26,15 @@
             }
         </style>
         <h:form>
-
+            <p:growl id="msjsAdmin"/>
         <p:diagram value="#{controladorDamasChinas.model}" style="height:600px" styleClass="ui-widget-content" />
         <p:commandButton id="createButton" icon="ui-icon-plus"   
                                              value="#{bundle.Create}" 
                                              actionListener="#{personaController.prepareCreate}" update=":PersonaCreateForm" oncomplete="PF('PersonaCreateDialog').show()"/>
         
         <p:commandButton id="btnJugar" value="Jugar" action="jugar" ajax="false"/>
+        
+        <p:commandButton value="Habilitar Juego" update="@all" ajax="false" action="#{damasAppBean.activarJuego()}"/>
         </h:form>
         <ui:include src="persona/Create.xhtml"/>
     </h:body>

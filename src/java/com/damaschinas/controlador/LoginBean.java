@@ -58,7 +58,16 @@ public class LoginBean implements Serializable{
             {
                 ControladorDamasChinas contDamas= (ControladorDamasChinas) FacesUtils.getManagedBean("controladorDamasChinas");
                 contDamas.setUsuario(usuarioEncontrado);
-                return "ingresar";
+                if(usuarioEncontrado.getTipoUsuario().getCodigo()==1)
+                {
+                    return "ingresar";
+                }    
+                else
+                {
+                    return "jugar";
+                }
+                
+                
                 
             }
             JsfUtil.addErrorMessage("Contraseña errada");

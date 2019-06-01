@@ -60,50 +60,64 @@
         </style>
     </h:head>
     <h:body>
-        <h:form id="frmTablero">
+
+        <h:form id="frmTablero" >
             <p:growl id="pgTablero"/>
-            <h:panelGroup id="panelTablero" layout="block" style="overflow: auto; width: 100%; height: 1000px;" >
-                <p:diagram id="tablero" value="#{damasAppBean.model}" style="height:1000px" styleClass="ui-widget-content" />
+
+            <h:panelGroup rendered="#{!damasAppBean.estadoJuego}">
+                <h:outputText value="Aún no existe un juego habilitado para ud"/>
+                <br/>
+                <h:outputText id="fecha_sistema" value="#{damasAppBean.fechaSistema}" 
+                              style="color: red; font-size: 4em;" />
+                
+                <p:poll interval="5"   update="frmTablero"  />
             </h:panelGroup>
 
-            <p:commandButton action="#{damasAppBean.simularJugada()}" value="Simular Jugada" update="@all" ajax="false"/>
-            
-            
-            <p:remoteCommand name="elementClickRight" 
-                                actionListener="#{damasAppBean.onClickRight()}">
-                </p:remoteCommand>
-            <script>
-                $(document).ready(function () {
-                    $('.ui-diagram > .ui-diagram-element').mousedown(function (info) {
-                        if (info.which === 3) {
-                            elementClickRight([{
-                                    name: 'elementId',
-                                    value: info.target.id
-                                }]);
-                            
-                        }
-                    });
-                });
-            </script>
+            <h:panelGroup id="gpJuego" >
+                <h:panelGroup rendered="#{damasAppBean.estadoJuego}" id="panelTablero" layout="block" style="overflow: auto; width: 100%; height: 1000px;" >
+                    <p:diagram id="tablero" value="#{damasAppBean.model}" style="height:1000px" styleClass="ui-widget-content" />
 
-            
-            
-            <p:contextMenu for="panelTablero" id="cmFicha" 
-                          targetFilter=".ui-diagram-element" >
-                <p:menuitem value="Prueba" update="@all"
-                            ajax="false" icon="ui-icon-disk" 
-                            action="#{damasAppBean.pruebaMenu()}"
-                            />
-               <p:menuitem value="Prueba 2" update="@all"
-                            ajax="false" icon="ui-icon-disk" 
-                            action="#{damasAppBean.pruebaMenu()}"
-                            />
-               <p:menuitem value="Prueba 3" update="@all"
-                            ajax="false" icon="ui-icon-disk" 
-                            action="#{damasAppBean.pruebaMenu()}"
-                            />
-            </p:contextMenu>
-            
+                    <p:commandButton action="#{damasAppBean.simularJugada()}" value="Simular Jugada" update="@all" ajax="false"/>
+                </h:panelGroup>
+
+                <p:remoteCommand name="elementClickRight" 
+                                 actionListener="#{damasAppBean.onClickRight()}">
+                </p:remoteCommand>
+                <script>
+                    $(document).ready(function () {
+                        $('.ui-diagram > .ui-diagram-element').mousedown(function (info) {
+                            if (info.which === 3) {
+                                elementClickRight([{
+                                        name: 'elementId',
+                                        value: info.target.id
+                                    }]);
+
+                            }
+                        });
+                    });
+                </script>
+
+
+
+                <p:contextMenu for="panelTablero" id="cmFicha" 
+                               targetFilter=".ui-diagram-element" >
+                    <p:menuitem value="Prueba" update="@all"
+                                ajax="false" icon="ui-icon-disk" 
+                                action="#{damasAppBean.pruebaMenu()}"
+                                />
+                    <p:menuitem value="Prueba 2" update="@all"
+                                ajax="false" icon="ui-icon-disk" 
+                                action="#{damasAppBean.pruebaMenu()}"
+                                />
+                    <p:menuitem value="Prueba 3" update="@all"
+                                ajax="false" icon="ui-icon-disk" 
+                                action="#{damasAppBean.pruebaMenu()}"
+                                />
+                </p:contextMenu>
+
+
+            </h:panelGroup>
+
         </h:form>
     </h:body>
 </html>
